@@ -1,0 +1,6 @@
+<h1>Comics</h1>
+@for (comic of arrayComics; track comic) {
+  <h4>{{ comic.titulo }}</h4>
+  <p>{{ comic.descripcion }}</p>
+  <img src="{{ comic.imagen }}" alt="{{ comic.titulo }}" style="width: 100px; height: 100px;" />
+}
