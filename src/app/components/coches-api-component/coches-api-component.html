@@ -1,0 +1,6 @@
+<h1>Coches</h1>
+@for (coche of arrayCoches; track coche) {
+  <p>{{ coche.marca }} - {{ coche.modelo }}</p>
+  <p>Conductor: {{ coche.conductor }}</p>
+  <img src="{{ coche.imagen }}" alt="Imagen del coche" />
+}

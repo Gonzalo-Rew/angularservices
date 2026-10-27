@@ -11,14 +11,35 @@ import { OnInit, ChangeDetectorRef } from '@angular/core';
 })
 export class PersonaApiComponent implements OnInit {
   public arrayPersonas!: Array<Persona>;
+
   constructor(
     private _cdr: ChangeDetectorRef,
     private _ps: PersonasService,
   ) {}
-  ngOnInit(): void {
-    this._ps.getPersonas().subscribe((personas) => {
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.arrayPersonas = await this._ps.getPersonasAsync();
+      this._cdr.detectChanges();
+    } catch (error) {
+      console.error('Error fetching personas:', error);
+    }
+
+    /*this._ps.getPersonasPromise().then((personas) => {
       this.arrayPersonas = personas;
       this._cdr.detectChanges();
-    });
+    }).catch((error) => {
+      console.error('Error fetching personas:', error);
+    });*/
+
+    /*this._ps.getPersonas().subscribe({
+      next: (personas) => {
+        this.arrayPersonas = personas;
+        this._cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error fetching personas:', error);
+      }
+    });*/
   }
 }
